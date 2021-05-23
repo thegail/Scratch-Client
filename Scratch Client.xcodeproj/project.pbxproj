@@ -18,6 +18,7 @@
 		9FF2F87A2659D6FD004CE198 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F8792659D6FD004CE198 /* Vertex.swift */; };
 		9FF2F87D2659D739004CE198 /* Temp_Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F87C2659D739004CE198 /* Temp_Cube.swift */; };
 		9FF2F8802659D776004CE198 /* Temp_CubeFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F87F2659D776004CE198 /* Temp_CubeFace.swift */; };
+		9FF2F8832659DA6B004CE198 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F8822659DA6B004CE198 /* Matrix.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		9FF2F8792659D6FD004CE198 /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		9FF2F87C2659D739004CE198 /* Temp_Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_Cube.swift; sourceTree = "<group>"; };
 		9FF2F87F2659D776004CE198 /* Temp_CubeFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_CubeFace.swift; sourceTree = "<group>"; };
+		9FF2F8822659DA6B004CE198 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				9FF2F87C2659D739004CE198 /* Temp_Cube.swift */,
 				9FF2F87F2659D776004CE198 /* Temp_CubeFace.swift */,
 				9FF2F8792659D6FD004CE198 /* Vertex.swift */,
+				9FF2F8822659DA6B004CE198 /* Matrix.swift */,
 				9FF2F8762659D4F7004CE198 /* shaders.metal */,
 			);
 			path = Render;
@@ -175,6 +178,7 @@
 				9F6814CF2644BF9C00A7086E /* Scratch_ClientApp.swift in Sources */,
 				9FF2F87026598DD2004CE198 /* RenderWrapper.swift in Sources */,
 				9FF2F87A2659D6FD004CE198 /* Vertex.swift in Sources */,
+				9FF2F8832659DA6B004CE198 /* Matrix.swift in Sources */,
 				9FF2F87D2659D739004CE198 /* Temp_Cube.swift in Sources */,
 				9FF2F86C26598BCF004CE198 /* RenderView.swift in Sources */,
 				9FF2F8802659D776004CE198 /* Temp_CubeFace.swift in Sources */,

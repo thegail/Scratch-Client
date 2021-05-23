@@ -47,11 +47,15 @@ class WorldRenderer {
 		
 		guard let renderPassEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
 		
+		var rotationMatrix = Matrix.rotation(x: Float.pi / 4, y: Float.pi / 4)
+		
 		guard let vertexBuffer = view.device?.makeBuffer(bytes: self.renderedVertices, length: self.renderedVertices.count * MemoryLayout<Vertex>.stride) else { fatalError("Failed to create vertex buffer") }
+		guard let matrixBuffer = view.device?.makeBuffer(bytes: &rotationMatrix, length: MemoryLayout<simd_float4x4>.size) else { fatalError("Failed to create matrix buffer") }
 		
 		renderPassEncoder.setRenderPipelineState(self.pipelineState)
 		
 		renderPassEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+		renderPassEncoder.setVertexBuffer(matrixBuffer, offset: 0, index: 1)
 		renderPassEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: self.renderedVertices.count)
 		
 		renderPassEncoder.endEncoding()
