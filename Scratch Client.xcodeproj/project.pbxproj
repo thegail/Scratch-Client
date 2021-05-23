@@ -11,6 +11,10 @@
 		9F6814D12644BF9C00A7086E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6814D02644BF9C00A7086E /* ContentView.swift */; };
 		9F6814D32644BFA200A7086E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6814D22644BFA200A7086E /* Assets.xcassets */; };
 		9F6814D62644BFA200A7086E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6814D52644BFA200A7086E /* Preview Assets.xcassets */; };
+		9FF2F86C26598BCF004CE198 /* RenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F86B26598BCF004CE198 /* RenderView.swift */; };
+		9FF2F87026598DD2004CE198 /* RenderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */; };
+		9FF2F87426599F08004CE198 /* WorldRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F87326599F08004CE198 /* WorldRenderer.swift */; };
+		9FF2F8772659D4F7004CE198 /* shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F8762659D4F7004CE198 /* shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		9F6814D52644BFA200A7086E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F6814D72644BFA200A7086E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F6814D82644BFA200A7086E /* Scratch_Client.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scratch_Client.entitlements; sourceTree = "<group>"; };
+		9FF2F86B26598BCF004CE198 /* RenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderView.swift; sourceTree = "<group>"; };
+		9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderWrapper.swift; sourceTree = "<group>"; };
+		9FF2F87326599F08004CE198 /* WorldRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldRenderer.swift; sourceTree = "<group>"; };
+		9FF2F8762659D4F7004CE198 /* shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 			children = (
 				9F6814CE2644BF9C00A7086E /* Scratch_ClientApp.swift */,
 				9F6814D02644BF9C00A7086E /* ContentView.swift */,
+				9FF2F86A26598BC3004CE198 /* Render */,
 				9F6814D22644BFA200A7086E /* Assets.xcassets */,
 				9F6814D72644BFA200A7086E /* Info.plist */,
 				9F6814D82644BFA200A7086E /* Scratch_Client.entitlements */,
@@ -69,6 +78,17 @@
 				9F6814D52644BFA200A7086E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9FF2F86A26598BC3004CE198 /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				9FF2F86B26598BCF004CE198 /* RenderView.swift */,
+				9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */,
+				9FF2F87326599F08004CE198 /* WorldRenderer.swift */,
+				9FF2F8762659D4F7004CE198 /* shaders.metal */,
+			);
+			path = Render;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,8 +160,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FF2F87426599F08004CE198 /* WorldRenderer.swift in Sources */,
 				9F6814D12644BF9C00A7086E /* ContentView.swift in Sources */,
+				9FF2F8772659D4F7004CE198 /* shaders.metal in Sources */,
 				9F6814CF2644BF9C00A7086E /* Scratch_ClientApp.swift in Sources */,
+				9FF2F87026598DD2004CE198 /* RenderWrapper.swift in Sources */,
+				9FF2F86C26598BCF004CE198 /* RenderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
