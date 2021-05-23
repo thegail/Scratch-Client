@@ -8,15 +8,27 @@
 #include <metal_stdlib>
 using namespace metal;
 
-vertex float4 sc_vertex_shader(constant float3* vertices [[buffer(0)]], uint vid [[vertex_id]], constant float4x4 &rm [[buffer(1)]]) {
-	float3 in = vertices[vid];
-	float4 out = float4(1);
-	out.xyz = in;
-	out = out * rm;
-	out.z = out.z + 0.469;
+struct Vertex {
+	float3 pos;
+	float ltl;
+};
+
+struct RasterizerData {
+	float4 pos [[position]];
+	float ltl;
+};
+
+vertex RasterizerData sc_vertex_shader(constant Vertex* vertices [[buffer(0)]], uint vid [[vertex_id]], constant float4x4 &rm [[buffer(1)]]) {
+	Vertex in = vertices[vid];
+	RasterizerData out;
+	
+	out.pos = float4(in.pos, 1) * rm;
+	out.pos.z = out.pos.z + 0.469;
+	
+	out.ltl = in.ltl;
 	return out;
 }
 
-fragment float4 sc_fragment_shader() {
-	return float4(1);
+fragment float4 sc_fragment_shader(RasterizerData in [[stage_in]]) {
+	return float4(float3(1) * in.ltl, 1);
 }

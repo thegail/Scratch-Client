@@ -36,7 +36,7 @@ class WorldRenderer {
 			fatalError("Failed to create render pipeline state. This message should never appear")
 		}
 		
-		self.renderedVertices = Cube(renderedFaces: [.north, .up, .down, .west, .east, .south]).vertices
+		self.renderedVertices = Cube(renderedFaces: [.down, .east, .north, .up, .west, .south]).vertices
 	}
 	
 	func draw(in view: MTKView) {

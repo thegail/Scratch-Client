@@ -10,4 +10,5 @@ import simd
 
 struct Vertex {
 	let position: simd_float3
+	let lightLevel: Float
 }
