@@ -12,6 +12,7 @@ class WorldRenderer {
 	
 	let commandQueue: MTLCommandQueue
 	let pipelineState: MTLRenderPipelineState
+	var renderedVertices: Array<Vertex>
 	
 	init() {
 		guard let device = MTLCreateSystemDefaultDevice() else { fatalError("Failed to get render view's device attribute. This is an issue with the way class WorldRenderer is initialized, and this message should never appear.") }
@@ -34,6 +35,8 @@ class WorldRenderer {
 		} catch {
 			fatalError("Failed to create render pipeline state. This message should never appear")
 		}
+		
+		self.renderedVertices = Cube(renderedFaces: [.north, .up, .down, .west, .east, .south]).vertices
 	}
 	
 	func draw(in view: MTKView) {
@@ -44,7 +47,12 @@ class WorldRenderer {
 		
 		guard let renderPassEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
 		
+		guard let vertexBuffer = view.device?.makeBuffer(bytes: self.renderedVertices, length: self.renderedVertices.count * MemoryLayout<Vertex>.stride) else { fatalError("Failed to create vertex buffer") }
+		
 		renderPassEncoder.setRenderPipelineState(self.pipelineState)
+		
+		renderPassEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+		renderPassEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: self.renderedVertices.count)
 		
 		renderPassEncoder.endEncoding()
 		

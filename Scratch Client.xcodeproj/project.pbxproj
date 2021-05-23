@@ -15,6 +15,9 @@
 		9FF2F87026598DD2004CE198 /* RenderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */; };
 		9FF2F87426599F08004CE198 /* WorldRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F87326599F08004CE198 /* WorldRenderer.swift */; };
 		9FF2F8772659D4F7004CE198 /* shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F8762659D4F7004CE198 /* shaders.metal */; };
+		9FF2F87A2659D6FD004CE198 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F8792659D6FD004CE198 /* Vertex.swift */; };
+		9FF2F87D2659D739004CE198 /* Temp_Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F87C2659D739004CE198 /* Temp_Cube.swift */; };
+		9FF2F8802659D776004CE198 /* Temp_CubeFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F87F2659D776004CE198 /* Temp_CubeFace.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderWrapper.swift; sourceTree = "<group>"; };
 		9FF2F87326599F08004CE198 /* WorldRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldRenderer.swift; sourceTree = "<group>"; };
 		9FF2F8762659D4F7004CE198 /* shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shaders.metal; sourceTree = "<group>"; };
+		9FF2F8792659D6FD004CE198 /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		9FF2F87C2659D739004CE198 /* Temp_Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_Cube.swift; sourceTree = "<group>"; };
+		9FF2F87F2659D776004CE198 /* Temp_CubeFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp_CubeFace.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,9 @@
 				9FF2F86B26598BCF004CE198 /* RenderView.swift */,
 				9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */,
 				9FF2F87326599F08004CE198 /* WorldRenderer.swift */,
+				9FF2F87C2659D739004CE198 /* Temp_Cube.swift */,
+				9FF2F87F2659D776004CE198 /* Temp_CubeFace.swift */,
+				9FF2F8792659D6FD004CE198 /* Vertex.swift */,
 				9FF2F8762659D4F7004CE198 /* shaders.metal */,
 			);
 			path = Render;
@@ -165,7 +174,10 @@
 				9FF2F8772659D4F7004CE198 /* shaders.metal in Sources */,
 				9F6814CF2644BF9C00A7086E /* Scratch_ClientApp.swift in Sources */,
 				9FF2F87026598DD2004CE198 /* RenderWrapper.swift in Sources */,
+				9FF2F87A2659D6FD004CE198 /* Vertex.swift in Sources */,
+				9FF2F87D2659D739004CE198 /* Temp_Cube.swift in Sources */,
 				9FF2F86C26598BCF004CE198 /* RenderView.swift in Sources */,
+				9FF2F8802659D776004CE198 /* Temp_CubeFace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
