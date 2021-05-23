@@ -8,7 +8,7 @@
 import Foundation
 import simd
 
-struct Cube {
+struct Cube: Model {
 	
 	private static let lightLevels: Dictionary<CubeFace, Float> = [
 		.north: 0.3,

@@ -30,6 +30,9 @@ struct RenderView: NSViewRepresentable {
 		metalView.framebufferOnly = true
 		metalView.clearColor = MTLClearColor(red: 0, green: 1, blue: 0, alpha: 1)
 		metalView.drawableSize = metalView.frame.size
+		metalView.depthStencilPixelFormat = .depth32Float
+		metalView.clearDepth = 1
+		
 		return metalView
 	}
 	

@@ -12,7 +12,7 @@ class WorldRenderer {
 	
 	let commandQueue: MTLCommandQueue
 	let pipelineState: MTLRenderPipelineState
-	var renderedVertices: Array<Vertex>
+	var renderedModel: Model
 	
 	init() {
 		guard let device = MTLCreateSystemDefaultDevice() else { fatalError("Failed to get render view's device attribute. This is an issue with the way class WorldRenderer is initialized, and this message should never appear.") }
@@ -29,6 +29,7 @@ class WorldRenderer {
 		pipelineStateDescriptor.vertexFunction = vertexShader
 		pipelineStateDescriptor.fragmentFunction = fragmentShader
 		pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+		pipelineStateDescriptor.depthAttachmentPixelFormat = .depth32Float
 		
 		do {
 			self.pipelineState = try device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
@@ -36,12 +37,21 @@ class WorldRenderer {
 			fatalError("Failed to create render pipeline state. This message should never appear")
 		}
 		
-		self.renderedVertices = Cube(renderedFaces: [.down, .east, .north, .up, .west, .south]).vertices
+		self.renderedModel = MiniChunk(height: 2, width: 2, depth: 2, state: [
+			[
+				[true, false],
+				[true, true]
+			],
+			[
+				[true, false],
+				[true, true]
+			]
+		])!
 	}
 	
 	func draw(in view: MTKView) {
-		guard let commandBuffer = self.commandQueue.makeCommandBuffer() else {return}
-		guard let renderPassDescriptor = view.currentRenderPassDescriptor else {return}
+		guard let commandBuffer = self.commandQueue.makeCommandBuffer() else { return }
+		guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
 		
 		renderPassDescriptor.colorAttachments[0].clearColor = view.clearColor
 		
@@ -49,14 +59,20 @@ class WorldRenderer {
 		
 		var rotationMatrix = Matrix.rotation(x: Float.pi / 4, y: Float.pi / 4)
 		
-		guard let vertexBuffer = view.device?.makeBuffer(bytes: self.renderedVertices, length: self.renderedVertices.count * MemoryLayout<Vertex>.stride) else { fatalError("Failed to create vertex buffer") }
+		guard let vertexBuffer = view.device?.makeBuffer(bytes: self.renderedModel.vertices, length: self.renderedModel.vertices.count * MemoryLayout<Vertex>.stride) else { fatalError("Failed to create vertex buffer") }
 		guard let matrixBuffer = view.device?.makeBuffer(bytes: &rotationMatrix, length: MemoryLayout<simd_float4x4>.size) else { fatalError("Failed to create matrix buffer") }
 		
+		let depthDescriptor = MTLDepthStencilDescriptor()
+		depthDescriptor.depthCompareFunction = .lessEqual
+		depthDescriptor.isDepthWriteEnabled = true
+		guard let depthState = view.device?.makeDepthStencilState(descriptor: depthDescriptor) else { return }
+		
 		renderPassEncoder.setRenderPipelineState(self.pipelineState)
+		renderPassEncoder.setDepthStencilState(depthState)
 		
 		renderPassEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
 		renderPassEncoder.setVertexBuffer(matrixBuffer, offset: 0, index: 1)
-		renderPassEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: self.renderedVertices.count)
+		renderPassEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: self.renderedModel.vertices.count)
 		
 		renderPassEncoder.endEncoding()
 		

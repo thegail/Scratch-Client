@@ -9,6 +9,6 @@ import Foundation
 import simd
 
 struct Vertex {
-	let position: simd_float3
-	let lightLevel: Float
+	var position: simd_float3
+	var lightLevel: Float
 }
