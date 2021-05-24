@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol Model {
+protocol Geometry {
 	var vertices: Array<Vertex> { get }
 }

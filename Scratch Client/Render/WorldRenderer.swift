@@ -12,7 +12,7 @@ class WorldRenderer {
 	
 	let commandQueue: MTLCommandQueue
 	let pipelineState: MTLRenderPipelineState
-	var renderedModel: Model
+	var renderedModel: Geometry
 	
 	init() {
 		guard let device = MTLCreateSystemDefaultDevice() else { fatalError("Failed to get render view's device attribute. This is an issue with the way class WorldRenderer is initialized, and this message should never appear.") }
@@ -57,10 +57,12 @@ class WorldRenderer {
 		
 		guard let renderPassEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
 		
-		var rotationMatrix = Matrix.rotations(x: Float.pi / 4, y: Float.pi / 4)
+		var modelToView = Matrix.translation(simd_float3(0, 0, 0.14))
+		var viewToClip = Matrix.projection(fov: Float.pi / 2)
 		
 		guard let vertexBuffer = view.device?.makeBuffer(bytes: self.renderedModel.vertices, length: self.renderedModel.vertices.count * MemoryLayout<Vertex>.stride) else { fatalError("Failed to create vertex buffer") }
-		guard let matrixBuffer = view.device?.makeBuffer(bytes: &rotationMatrix, length: MemoryLayout<simd_float4x4>.size) else { fatalError("Failed to create matrix buffer") }
+		guard let modelToViewMatrixBuffer = view.device?.makeBuffer(bytes: &modelToView, length: MemoryLayout<simd_float4x4>.size) else { fatalError("Failed to create matrix buffer") }
+		guard let viewToClipMatrixBuffer = view.device?.makeBuffer(bytes: &viewToClip, length: MemoryLayout<simd_float4x4>.size) else { fatalError("Failed to create matrix buffer") }
 		
 		let depthDescriptor = MTLDepthStencilDescriptor()
 		depthDescriptor.depthCompareFunction = .lessEqual
@@ -71,7 +73,8 @@ class WorldRenderer {
 		renderPassEncoder.setDepthStencilState(depthState)
 		
 		renderPassEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-		renderPassEncoder.setVertexBuffer(matrixBuffer, offset: 0, index: 1)
+		renderPassEncoder.setVertexBuffer(modelToViewMatrixBuffer, offset: 0, index: 1)
+		renderPassEncoder.setVertexBuffer(viewToClipMatrixBuffer, offset: 0, index: 2)
 		renderPassEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: self.renderedModel.vertices.count)
 		
 		renderPassEncoder.endEncoding()

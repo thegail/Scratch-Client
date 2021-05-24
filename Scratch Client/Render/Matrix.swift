@@ -38,8 +38,8 @@ struct Matrix {
 	static func translation(_ translation: simd_float3) -> simd_float4x4 {
 		var matrix = simd_float4x4(1)
 		matrix.columns.0[3] = translation.x
-		matrix.columns.0[3] = translation.y
-		matrix.columns.0[3] = translation.z
+		matrix.columns.1[3] = translation.y
+		matrix.columns.2[3] = translation.z
 		return matrix
 	}
 	
@@ -49,5 +49,17 @@ struct Matrix {
 	
 	static func scaling(vector: simd_float3) -> simd_float4x4 {
 		return simd_float4x4(diagonal: simd_float4(vector, 1))
+	}
+	
+	static func projection(near: Float = 0.001, far: Float = 2, fov: Float) -> simd_float4x4 {
+		var matrix = simd_float4x4()
+		let scale = 1 / tan(fov * 0.5)
+		matrix.columns.0[0] = scale
+		matrix.columns.1[1] = scale
+		matrix.columns.2[2] = -far / (far - near)
+		matrix.columns.2[3] = -far * near / (far - near)
+		matrix.columns.3[2] = -1
+		matrix.columns.3[3] = 0
+		return matrix
 	}
 }

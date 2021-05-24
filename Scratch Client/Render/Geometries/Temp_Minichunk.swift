@@ -8,7 +8,7 @@
 import Foundation
 import simd
 
-struct MiniChunk: Model {
+struct MiniChunk: Geometry {
 	let width: UInt
 	let height: UInt
 	let depth: UInt
@@ -48,7 +48,7 @@ struct MiniChunk: Model {
 	
 	var vertices: Array<Vertex> {
 		var finalVertices: Array<Vertex> = []
-		let cubeDimension: Float = 0.415
+		let cubeDimension: Float = 0.1
 		for y in 0..<height {
 			for x in 0..<width {
 				for z in 0..<depth {

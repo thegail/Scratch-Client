@@ -18,12 +18,15 @@ struct RasterizerData {
 	float ltl;
 };
 
-vertex RasterizerData sc_vertex_shader(constant Vertex* vertices [[buffer(0)]], uint vid [[vertex_id]], constant float4x4 &rm [[buffer(1)]]) {
+vertex RasterizerData sc_vertex_shader(constant Vertex* vertices [[buffer(0)]], uint vid [[vertex_id]], constant float4x4 &mtv [[buffer(1)]], constant float4x4 &vtc [[buffer(2)]]) {
 	Vertex in = vertices[vid];
 	RasterizerData out;
 	
-	out.pos = float4(in.pos, 1) * rm;
-	out.pos.z = out.pos.z + 0.469;
+	out.pos = float4(in.pos, 1);
+	out.pos.z = out.pos.z - 0.26;
+	out.pos.y = out.pos.y - 0.1;
+	out.pos = out.pos * vtc;
+//	out.pos.z = out.pos.z + 0.49;
 	
 	out.ltl = in.ltl;
 	return out;

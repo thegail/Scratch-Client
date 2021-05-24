@@ -54,6 +54,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F1E761A265C73110089FE57 /* Geometries */ = {
+			isa = PBXGroup;
+			children = (
+				9FF2F8882659E498004CE198 /* Model.swift */,
+				9FF2F8792659D6FD004CE198 /* Vertex.swift */,
+				9FF2F87C2659D739004CE198 /* Temp_Cube.swift */,
+				9FF2F87F2659D776004CE198 /* Temp_CubeFace.swift */,
+				9FF2F8852659E47F004CE198 /* Temp_Minichunk.swift */,
+			);
+			path = Geometries;
+			sourceTree = "<group>";
+		};
 		9F6814C22644BF9C00A7086E = {
 			isa = PBXGroup;
 			children = (
@@ -95,14 +107,10 @@
 		9FF2F86A26598BC3004CE198 /* Render */ = {
 			isa = PBXGroup;
 			children = (
+				9F1E761A265C73110089FE57 /* Geometries */,
 				9FF2F86B26598BCF004CE198 /* RenderView.swift */,
 				9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */,
 				9FF2F87326599F08004CE198 /* WorldRenderer.swift */,
-				9FF2F87C2659D739004CE198 /* Temp_Cube.swift */,
-				9FF2F8882659E498004CE198 /* Model.swift */,
-				9FF2F87F2659D776004CE198 /* Temp_CubeFace.swift */,
-				9FF2F8852659E47F004CE198 /* Temp_Minichunk.swift */,
-				9FF2F8792659D6FD004CE198 /* Vertex.swift */,
 				9FF2F8822659DA6B004CE198 /* Matrix.swift */,
 				9FF2F8762659D4F7004CE198 /* shaders.metal */,
 			);

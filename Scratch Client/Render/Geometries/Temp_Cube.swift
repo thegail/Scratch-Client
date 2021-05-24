@@ -8,7 +8,7 @@
 import Foundation
 import simd
 
-struct Cube: Model {
+struct Cube: Geometry {
 	
 	private static let lightLevels: Dictionary<CubeFace, Float> = [
 		.north: 0.3,
@@ -19,8 +19,8 @@ struct Cube: Model {
 		.down: 1
 	]
 	
-	private static let neg: Float = -0.275
-	private static let pos: Float = 0.275
+	private static let neg: Float = -0.05
+	private static let pos: Float = 0.05
 	
 	static let vertices: Array<simd_float3> = [
 		simd_float3(neg, neg, neg),
@@ -33,7 +33,7 @@ struct Cube: Model {
 		simd_float3(pos, pos, pos)
 	]
 	
-	let renderedFaces: Array<CubeFace>
+	let renderedFaces: Set<CubeFace>
 	
 	var vertices: Array<Vertex> {
 		var indices: Array<UInt16> = []
