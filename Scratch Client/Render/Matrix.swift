@@ -51,6 +51,13 @@ struct Matrix {
 		return simd_float4x4(diagonal: simd_float4(vector, 1))
 	}
 	
+	static let reflectZ = simd_float4x4(rows: [
+		simd_float4(1, 0, 0, 0),
+		simd_float4(0, 1, 0, 0),
+		simd_float4(0, 0, -1, 0),
+		simd_float4(0, 0, 0, 1)
+	])
+	
 	static func projection(near: Float = 0.001, far: Float = 2, fov: Float) -> simd_float4x4 {
 		var matrix = simd_float4x4()
 		let scale = 1 / tan(fov * 0.5)
@@ -60,6 +67,6 @@ struct Matrix {
 		matrix.columns.2[3] = -far * near / (far - near)
 		matrix.columns.3[2] = -1
 		matrix.columns.3[3] = 0
-		return matrix
+		return Matrix.reflectZ * matrix
 	}
 }

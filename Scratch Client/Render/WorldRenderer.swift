@@ -15,6 +15,7 @@ class WorldRenderer {
 	var renderedModel: Geometry
 	
 	init() {
+		// @TODO handle fatalErrors
 		guard let device = MTLCreateSystemDefaultDevice() else { fatalError("Failed to get render view's device attribute. This is an issue with the way class WorldRenderer is initialized, and this message should never appear.") }
 		guard let temporaryCommandQueue = device.makeCommandQueue() else { fatalError("Failed to create rendering command queue.") }
 		self.commandQueue = temporaryCommandQueue
@@ -37,16 +38,7 @@ class WorldRenderer {
 			fatalError("Failed to create render pipeline state. This message should never appear")
 		}
 		
-		self.renderedModel = MiniChunk(height: 2, width: 2, depth: 2, state: [
-			[
-				[true, false],
-				[true, true]
-			],
-			[
-				[true, false],
-				[true, true]
-			]
-		])!
+		self.renderedModel = BlockGeometry(faces: [.up, .down, .north, .south, .east, .west], position: simd_float3(0.3, 0.3, 0.7), sideLength: 0.25, lightLevel: 1)
 	}
 	
 	func draw(in view: MTKView) {
@@ -57,12 +49,11 @@ class WorldRenderer {
 		
 		guard let renderPassEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
 		
-		var modelToView = Matrix.translation(simd_float3(0, 0, 0.14))
-		var viewToClip = Matrix.projection(fov: Float.pi / 2)
+		var worldToClipMatrix = Camera(position: simd_float3(0, 0, 0), pitch: 0, yaw: 0, fov: Float.pi / 2).worldToClipMatrix
 		
 		guard let vertexBuffer = view.device?.makeBuffer(bytes: self.renderedModel.vertices, length: self.renderedModel.vertices.count * MemoryLayout<Vertex>.stride) else { fatalError("Failed to create vertex buffer") }
-		guard let modelToViewMatrixBuffer = view.device?.makeBuffer(bytes: &modelToView, length: MemoryLayout<simd_float4x4>.size) else { fatalError("Failed to create matrix buffer") }
-		guard let viewToClipMatrixBuffer = view.device?.makeBuffer(bytes: &viewToClip, length: MemoryLayout<simd_float4x4>.size) else { fatalError("Failed to create matrix buffer") }
+		
+		guard let worldToClipMatrixBuffer = view.device?.makeBuffer(bytes: &worldToClipMatrix, length: MemoryLayout<simd_float4x4>.size) else { fatalError("Failed to create matrix buffer") }
 		
 		let depthDescriptor = MTLDepthStencilDescriptor()
 		depthDescriptor.depthCompareFunction = .lessEqual
@@ -73,8 +64,7 @@ class WorldRenderer {
 		renderPassEncoder.setDepthStencilState(depthState)
 		
 		renderPassEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-		renderPassEncoder.setVertexBuffer(modelToViewMatrixBuffer, offset: 0, index: 1)
-		renderPassEncoder.setVertexBuffer(viewToClipMatrixBuffer, offset: 0, index: 2)
+		renderPassEncoder.setVertexBuffer(worldToClipMatrixBuffer, offset: 0, index: 1)
 		renderPassEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: self.renderedModel.vertices.count)
 		
 		renderPassEncoder.endEncoding()
