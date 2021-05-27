@@ -11,6 +11,7 @@
 		9F1E763E265C97BF0089FE57 /* BlockGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E763D265C97BF0089FE57 /* BlockGeometry.swift */; };
 		9F1E7644265CA1F70089FE57 /* ChunkGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E7643265CA1F70089FE57 /* ChunkGeometry.swift */; };
 		9F1E7647265CA48F0089FE57 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E7646265CA48F0089FE57 /* Camera.swift */; };
+		9F1E764A265D44C80089FE57 /* MetalViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E7649265D44C80089FE57 /* MetalViewWrapper.swift */; };
 		9F6814CF2644BF9C00A7086E /* Scratch_ClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6814CE2644BF9C00A7086E /* Scratch_ClientApp.swift */; };
 		9F6814D12644BF9C00A7086E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6814D02644BF9C00A7086E /* ContentView.swift */; };
 		9F6814D32644BFA200A7086E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6814D22644BFA200A7086E /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		9F1E763D265C97BF0089FE57 /* BlockGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockGeometry.swift; sourceTree = "<group>"; };
 		9F1E7643265CA1F70089FE57 /* ChunkGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkGeometry.swift; sourceTree = "<group>"; };
 		9F1E7646265CA48F0089FE57 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		9F1E7649265D44C80089FE57 /* MetalViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewWrapper.swift; sourceTree = "<group>"; };
 		9F6814CB2644BF9C00A7086E /* Scratch Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Scratch Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F6814CE2644BF9C00A7086E /* Scratch_ClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scratch_ClientApp.swift; sourceTree = "<group>"; };
 		9F6814D02644BF9C00A7086E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				9F1E761A265C73110089FE57 /* Geometries */,
 				9FF2F86B26598BCF004CE198 /* RenderView.swift */,
+				9F1E7649265D44C80089FE57 /* MetalViewWrapper.swift */,
 				9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */,
 				9FF2F87326599F08004CE198 /* WorldRenderer.swift */,
 				9FF2F8822659DA6B004CE198 /* Matrix.swift */,
@@ -220,6 +223,7 @@
 				9FF2F87A2659D6FD004CE198 /* Vertex.swift in Sources */,
 				9FF2F8832659DA6B004CE198 /* Matrix.swift in Sources */,
 				9FF2F87D2659D739004CE198 /* Temp_Cube.swift in Sources */,
+				9F1E764A265D44C80089FE57 /* MetalViewWrapper.swift in Sources */,
 				9FF2F86C26598BCF004CE198 /* RenderView.swift in Sources */,
 				9FF2F8802659D776004CE198 /* CubeFace.swift in Sources */,
 			);

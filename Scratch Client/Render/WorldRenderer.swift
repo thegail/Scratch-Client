@@ -13,6 +13,7 @@ class WorldRenderer {
 	let commandQueue: MTLCommandQueue
 	let pipelineState: MTLRenderPipelineState
 	var renderedModel: Geometry
+	var camera: Camera
 	
 	init() {
 		// @TODO handle fatalErrors
@@ -20,6 +21,7 @@ class WorldRenderer {
 		guard let temporaryCommandQueue = device.makeCommandQueue() else { fatalError("Failed to create rendering command queue.") }
 		self.commandQueue = temporaryCommandQueue
 		
+		self.camera = Camera(position: simd_float3(0, 0, 0), pitch: 0, yaw: 0, fov: Float.pi / 2)
 		
 		let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
 		
@@ -49,7 +51,7 @@ class WorldRenderer {
 		
 		guard let renderPassEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
 		
-		var worldToClipMatrix = Camera(position: simd_float3(0, 0, 0), pitch: 0, yaw: 0, fov: Float.pi / 2).worldToClipMatrix
+		var worldToClipMatrix = self.camera.worldToClipMatrix
 		
 		guard let vertexBuffer = view.device?.makeBuffer(bytes: self.renderedModel.vertices, length: self.renderedModel.vertices.count * MemoryLayout<Vertex>.stride) else { fatalError("Failed to create vertex buffer") }
 		

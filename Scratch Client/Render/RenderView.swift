@@ -18,7 +18,7 @@ struct RenderView: NSViewRepresentable {
 	}
 	
 	func makeNSView(context: Context) -> some NSView {
-		let metalView = MTKView()
+		let metalView = MetalViewWrapper()
 		metalView.delegate = context.coordinator
 		metalView.preferredFramesPerSecond = self.fps
 		let device = MTLCreateSystemDefaultDevice()
