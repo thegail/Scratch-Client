@@ -149,6 +149,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F6814DB2644BFA200A7086E /* Build configuration list for PBXNativeTarget "Scratch Client" */;
 			buildPhases = (
+				9F1D2E962661809600965A3F /* SwiftLint */,
 				9F6814C72644BF9C00A7086E /* Sources */,
 				9F6814C82644BF9C00A7086E /* Frameworks */,
 				9F6814C92644BF9C00A7086E /* Resources */,
@@ -205,6 +206,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9F1D2E962661809600965A3F /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9F6814C72644BF9C00A7086E /* Sources */ = {
