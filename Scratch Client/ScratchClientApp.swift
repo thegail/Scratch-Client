@@ -1,5 +1,5 @@
 //
-//  Scratch_ClientApp.swift
+//  ScratchClientApp.swift
 //  Scratch Client
 //
 //  Created by Teddy Gaillard on 5/6/21.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Scratch_ClientApp: App {
+struct ScratchClientApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

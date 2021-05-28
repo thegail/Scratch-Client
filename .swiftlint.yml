@@ -1,0 +1,23 @@
+disabled_rules:
+  - trailing_whitespace
+  - vertical_whitespace
+  - syntactic_sugar
+
+opt_in_rules:
+  - convenience_type
+  - empty_count
+  - empty_string
+  - fatal_error_message
+  - file_name
+  - modifier_order
+  - toggle_bool
+  - file_header
+
+file_header:
+  required_pattern:
+    |
+    \/\/
+    \/\/  SWIFTLINT_CURRENT_FILENAME
+    \/\/  Scratch Client( Tests)?
+    \/\/
+    \/\/  Created by Teddy Gaillard on .{1,2}\/.{1,2}\/.{1,2}\.

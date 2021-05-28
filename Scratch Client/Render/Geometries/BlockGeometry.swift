@@ -28,7 +28,12 @@ struct BlockGeometry: Geometry {
 		
 		var temporaryFaces: Array<BlockFaceGeometry> = []
 		for face in faces {
-			temporaryFaces.append(BlockFaceGeometry(direction: face, position: position, sideLength: sideLength, lightLevel: BlockGeometry.lightingConstants[face]!))
+			temporaryFaces.append(BlockFaceGeometry(
+				direction: face,
+				position: position,
+				sideLength: sideLength,
+				lightLevel: BlockGeometry.lightingConstants[face]!
+			))
 		}
 		
 		self.renderedFaces = faces
