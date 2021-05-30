@@ -16,20 +16,20 @@ struct BlockFaceGeometry: Geometry {
 	let lightLevel: Float
 	
 	var vertices: Array<Vertex> {
-		let neg = -sideLength/2
-		let pos = sideLength/2
+		let neg: Float = 0
+		let pos = sideLength
 		
 		var finalIndices: Array<UInt> = []
 		
 		let indices = [
-			position + simd_float3(neg, neg, neg),
-			position + simd_float3(neg, neg, pos),
-			position + simd_float3(neg, pos, neg),
-			position + simd_float3(neg, pos, pos),
-			position + simd_float3(pos, neg, neg),
-			position + simd_float3(pos, neg, pos),
-			position + simd_float3(pos, pos, neg),
-			position + simd_float3(pos, pos, pos)
+			self.position + simd_float3(neg, neg, neg),
+			self.position + simd_float3(neg, neg, pos),
+			self.position + simd_float3(neg, pos, neg),
+			self.position + simd_float3(neg, pos, pos),
+			self.position + simd_float3(pos, neg, neg),
+			self.position + simd_float3(pos, neg, pos),
+			self.position + simd_float3(pos, pos, neg),
+			self.position + simd_float3(pos, pos, pos)
 		]
 		
 		switch self.direction {

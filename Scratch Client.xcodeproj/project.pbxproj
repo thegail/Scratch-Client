@@ -19,6 +19,8 @@
 		9F6814D32644BFA200A7086E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6814D22644BFA200A7086E /* Assets.xcassets */; };
 		9F6814D62644BFA200A7086E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F6814D52644BFA200A7086E /* Preview Assets.xcassets */; };
 		9F6C407C26618BFB00AA9C8F /* DrawError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C407B26618BFB00AA9C8F /* DrawError.swift */; };
+		9FDCF1342663252D00EF36AA /* ChunkGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDCF1332663252D00EF36AA /* ChunkGeometry.swift */; };
+		9FDCF13B2663439D00EF36AA /* GenerateChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDCF13A2663439C00EF36AA /* GenerateChunk.swift */; };
 		9FF2F86C26598BCF004CE198 /* RenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F86B26598BCF004CE198 /* RenderView.swift */; };
 		9FF2F87026598DD2004CE198 /* RenderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */; };
 		9FF2F87426599F08004CE198 /* WorldRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F87326599F08004CE198 /* WorldRenderer.swift */; };
@@ -47,6 +49,8 @@
 		9F6814D72644BFA200A7086E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F6814D82644BFA200A7086E /* Scratch_Client.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scratch_Client.entitlements; sourceTree = "<group>"; };
 		9F6C407B26618BFB00AA9C8F /* DrawError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawError.swift; sourceTree = "<group>"; };
+		9FDCF1332663252D00EF36AA /* ChunkGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkGeometry.swift; sourceTree = "<group>"; };
+		9FDCF13A2663439C00EF36AA /* GenerateChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateChunk.swift; sourceTree = "<group>"; };
 		9FF2F86B26598BCF004CE198 /* RenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderView.swift; sourceTree = "<group>"; };
 		9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderWrapper.swift; sourceTree = "<group>"; };
 		9FF2F87326599F08004CE198 /* WorldRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldRenderer.swift; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 				9FF2F8792659D6FD004CE198 /* Vertex.swift */,
 				9F1E7638265C891E0089FE57 /* BlockFaceGeometry.swift */,
 				9F1E763D265C97BF0089FE57 /* BlockGeometry.swift */,
+				9FDCF1332663252D00EF36AA /* ChunkGeometry.swift */,
 				9FF2F87F2659D776004CE198 /* CubeFace.swift */,
 			);
 			path = Geometries;
@@ -139,6 +144,7 @@
 				9F1E7649265D44C80089FE57 /* MetalViewWrapper.swift */,
 				9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */,
 				9FF2F87326599F08004CE198 /* WorldRenderer.swift */,
+				9FDCF13A2663439C00EF36AA /* GenerateChunk.swift */,
 				9F1D2EA92661851C00965A3F /* Error Handling */,
 				9FF2F8822659DA6B004CE198 /* Matrix.swift */,
 				9F1E7646265CA48F0089FE57 /* Camera.swift */,
@@ -240,9 +246,11 @@
 			files = (
 				9F1E7647265CA48F0089FE57 /* Camera.swift in Sources */,
 				9FF2F87426599F08004CE198 /* WorldRenderer.swift in Sources */,
+				9FDCF13B2663439D00EF36AA /* GenerateChunk.swift in Sources */,
 				9F6C407C26618BFB00AA9C8F /* DrawError.swift in Sources */,
 				9F1E763E265C97BF0089FE57 /* BlockGeometry.swift in Sources */,
 				9F1D2EA72661851700965A3F /* BufferType.swift in Sources */,
+				9FDCF1342663252D00EF36AA /* ChunkGeometry.swift in Sources */,
 				9F6814D12644BF9C00A7086E /* ContentView.swift in Sources */,
 				9FF2F8892659E498004CE198 /* Geometry.swift in Sources */,
 				9FF2F8772659D4F7004CE198 /* shaders.metal in Sources */,

@@ -10,4 +10,6 @@ import Foundation
 enum CubeFace {
 	// swiftlint:disable:next identifier_name
 	case up, down, north, south, east, west
+	
+	static let all: Set<CubeFace> = [.up, .down, .north, .south, .east, .west]
 }

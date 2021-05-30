@@ -22,7 +22,7 @@ class WorldRenderer {
 		}
 		self.commandQueue = temporaryCommandQueue
 		
-		self.camera = Camera(position: simd_float3(0, 0, 0), pitch: 0, yaw: 0, fov: Float.pi / 2)
+		self.camera = Camera(position: simd_float3(-0.1, -0.1, -0.5), pitch: 0, yaw: 0, fov: Float.pi / 2)
 		
 		let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
 		
@@ -45,12 +45,20 @@ class WorldRenderer {
 			fatalError("Failed to create render pipeline state. This message should never appear")
 		}
 		
-		self.renderedModel = BlockGeometry(
-			faces: [.up, .down, .north, .south, .east, .west],
-			position: simd_float3(0.3, 0.3, 0.7),
-			sideLength: 0.25,
-			lightLevel: 1
-		)
+		let cSize = UInt(8)
+		self.renderedModel = ChunkGeometry(
+			height: cSize,
+			width: cSize,
+			depth: cSize,
+			dimensions: simd_float3(repeating: 0.25),
+			blocks: generateChunk(size: Int(cSize))
+		)!
+//		self.renderedModel = BlockGeometry(
+//			faces: CubeFace.all,
+//			position: simd_float3(0, 0, 0),
+//			sideLength: 0.25,
+//			lightLevel: 1
+//		)
 	}
 	
 	func draw(in view: MTKView) throws {

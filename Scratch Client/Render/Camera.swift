@@ -15,7 +15,7 @@ struct Camera {
 	var fov: Float
 	
 	var worldToClipMatrix: simd_float4x4 {
-		let worldToViewMatrix = Matrix.rotations(x: self.pitch, y: self.yaw) * Matrix.translation(-self.position)
+		let worldToViewMatrix = Matrix.translation(-self.position) * Matrix.rotations(x: self.pitch, y: self.yaw)
 		let viewToClipMatrix = Matrix.projection(fov: self.fov)
 		return worldToViewMatrix * viewToClipMatrix
 	}
