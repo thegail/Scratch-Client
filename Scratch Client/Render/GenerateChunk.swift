@@ -7,9 +7,11 @@
 
 import Foundation
 
-func generateChunk(size: Int) -> Array<Array<Array<Bool>>> {
+func generateChunk() -> Array<Array<Array<Bool>>> {
 	var final: Array<Array<Array<Bool>>> = []
-	for yCoordinate in 0..<size {
+	let ySize = 256
+	let size = 16
+	for yCoordinate in 0..<ySize {
 		final.append([])
 		for xCoordinate in 0..<size {
 			final[yCoordinate].append([])

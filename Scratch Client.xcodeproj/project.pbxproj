@@ -21,6 +21,7 @@
 		9F6C407C26618BFB00AA9C8F /* DrawError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6C407B26618BFB00AA9C8F /* DrawError.swift */; };
 		9FDCF1342663252D00EF36AA /* ChunkGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDCF1332663252D00EF36AA /* ChunkGeometry.swift */; };
 		9FDCF13B2663439D00EF36AA /* GenerateChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDCF13A2663439C00EF36AA /* GenerateChunk.swift */; };
+		9FDCF13E2663675900EF36AA /* GlobalGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDCF13D2663675900EF36AA /* GlobalGeometry.swift */; };
 		9FF2F86C26598BCF004CE198 /* RenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F86B26598BCF004CE198 /* RenderView.swift */; };
 		9FF2F87026598DD2004CE198 /* RenderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */; };
 		9FF2F87426599F08004CE198 /* WorldRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2F87326599F08004CE198 /* WorldRenderer.swift */; };
@@ -51,6 +52,7 @@
 		9F6C407B26618BFB00AA9C8F /* DrawError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawError.swift; sourceTree = "<group>"; };
 		9FDCF1332663252D00EF36AA /* ChunkGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkGeometry.swift; sourceTree = "<group>"; };
 		9FDCF13A2663439C00EF36AA /* GenerateChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateChunk.swift; sourceTree = "<group>"; };
+		9FDCF13D2663675900EF36AA /* GlobalGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGeometry.swift; sourceTree = "<group>"; };
 		9FF2F86B26598BCF004CE198 /* RenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderView.swift; sourceTree = "<group>"; };
 		9FF2F86F26598DD2004CE198 /* RenderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderWrapper.swift; sourceTree = "<group>"; };
 		9FF2F87326599F08004CE198 /* WorldRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldRenderer.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				9FF2F8882659E498004CE198 /* Geometry.swift */,
+				9FDCF13D2663675900EF36AA /* GlobalGeometry.swift */,
 				9FF2F8792659D6FD004CE198 /* Vertex.swift */,
 				9F1E7638265C891E0089FE57 /* BlockFaceGeometry.swift */,
 				9F1E763D265C97BF0089FE57 /* BlockGeometry.swift */,
@@ -258,6 +261,7 @@
 				9F1E7639265C891E0089FE57 /* BlockFaceGeometry.swift in Sources */,
 				9FF2F87026598DD2004CE198 /* RenderWrapper.swift in Sources */,
 				9FF2F87A2659D6FD004CE198 /* Vertex.swift in Sources */,
+				9FDCF13E2663675900EF36AA /* GlobalGeometry.swift in Sources */,
 				9FF2F8832659DA6B004CE198 /* Matrix.swift in Sources */,
 				9F1E764A265D44C80089FE57 /* MetalViewWrapper.swift in Sources */,
 				9FF2F86C26598BCF004CE198 /* RenderView.swift in Sources */,

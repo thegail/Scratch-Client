@@ -12,6 +12,8 @@ opt_in_rules:
   - modifier_order
   - toggle_bool
   - file_header
+  - explicit_self
+  - unused_import
 
 file_header:
   required_pattern:

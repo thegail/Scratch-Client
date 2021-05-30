@@ -8,22 +8,31 @@
 import Foundation
 import simd
 
-struct ChunkGeometry: Geometry {
+struct ChunkGeometry: GlobalGeometry {
 	
 	let height: UInt
 	let width: UInt
 	let depth: UInt
 	let dimensions: simd_float3
+	let position: simd_float3
 	
 	private var blocks: Array<Array<Array<BlockGeometry?>>>
 	private(set) var vertices: Array<Vertex>
 	
-	init?(height: UInt, width: UInt, depth: UInt, dimensions: simd_float3, blocks: Array<Array<Array<Bool>>>) {
+	init?(
+		height: UInt,
+		width: UInt,
+		depth: UInt,
+		dimensions: simd_float3,
+		position: simd_float3,
+		blocks: Array<Array<Array<Bool>>>
+	) {
 		
 		self.height = height
 		self.width = width
 		self.depth = depth
 		self.dimensions = dimensions
+		self.position = position
 		
 		let sideLength = dimensions.y / Float(height)
 		
@@ -104,5 +113,9 @@ struct ChunkGeometry: Geometry {
 		}
 		
 		return CubeFace.all.subtracting(coveredFaces)
+	}
+	
+	var modelToWorld: simd_float4x4 {
+		return Matrix.translation(-self.position)
 	}
 }

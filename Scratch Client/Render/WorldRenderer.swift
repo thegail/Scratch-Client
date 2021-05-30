@@ -12,7 +12,7 @@ class WorldRenderer {
 	
 	let commandQueue: MTLCommandQueue
 	let pipelineState: MTLRenderPipelineState
-	var renderedModel: Geometry
+	var renderedModels: Array<GlobalGeometry>
 	var camera: Camera
 	
 	init() throws {
@@ -22,7 +22,7 @@ class WorldRenderer {
 		}
 		self.commandQueue = temporaryCommandQueue
 		
-		self.camera = Camera(position: simd_float3(-0.1, -0.1, -0.5), pitch: 0, yaw: 0, fov: Float.pi / 2)
+		self.camera = Camera(position: simd_float3(0.1, 1.1, -0.3), pitch: 0, yaw: 0, fov: Float.pi / 2)
 		
 		let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
 		
@@ -45,20 +45,24 @@ class WorldRenderer {
 			fatalError("Failed to create render pipeline state. This message should never appear")
 		}
 		
-		let cSize = UInt(8)
-		self.renderedModel = ChunkGeometry(
-			height: cSize,
-			width: cSize,
-			depth: cSize,
-			dimensions: simd_float3(repeating: 0.25),
-			blocks: generateChunk(size: Int(cSize))
-		)!
-//		self.renderedModel = BlockGeometry(
-//			faces: CubeFace.all,
-//			position: simd_float3(0, 0, 0),
-//			sideLength: 0.25,
-//			lightLevel: 1
-//		)
+		self.renderedModels = [
+			ChunkGeometry(
+				height: UInt(256),
+				width: UInt(16),
+				depth: UInt(16),
+				dimensions: simd_float3(0.0625, 1, 0.0625),
+				position: simd_float3(0, 0, 0),
+				blocks: generateChunk()
+			)!,
+			ChunkGeometry(
+				height: UInt(256),
+				width: UInt(16),
+				depth: UInt(16),
+				dimensions: simd_float3(0.0625, 1, 0.0625),
+				position: simd_float3(0.0625, 0, 0),
+				blocks: generateChunk()
+			)!
+		]
 	}
 	
 	func draw(in view: MTKView) throws {
@@ -70,12 +74,6 @@ class WorldRenderer {
 		guard let renderPassEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
 		
 		var worldToClipMatrix = self.camera.worldToClipMatrix
-		
-		guard let vertexBuffer = view.device?.makeBuffer(
-				bytes: self.renderedModel.vertices,
-				length: self.renderedModel.vertices.count * MemoryLayout<Vertex>.stride) else {
-			throw DrawError.failedToCreateBuffer(type: .vertex)
-		}
 		
 		let matrixSize = MemoryLayout<simd_float4x4>.size
 		guard let worldToClipMatrixBuffer = view.device?.makeBuffer(bytes: &worldToClipMatrix, length: matrixSize) else {
@@ -90,9 +88,19 @@ class WorldRenderer {
 		renderPassEncoder.setRenderPipelineState(self.pipelineState)
 		renderPassEncoder.setDepthStencilState(depthState)
 		
-		renderPassEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-		renderPassEncoder.setVertexBuffer(worldToClipMatrixBuffer, offset: 0, index: 1)
-		renderPassEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: self.renderedModel.vertices.count)
+		
+		for renderedModel in self.renderedModels {
+			guard let vertexBuffer = renderedModel.generateVertexBuffer() else {
+				throw DrawError.failedToCreateBuffer(type: .vertex)
+			}
+			guard let modelToWorldMatrixBuffer = renderedModel.generateMatrixBuffer() else {
+				throw DrawError.failedToCreateBuffer(type: .matrix)
+			}
+			renderPassEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+			renderPassEncoder.setVertexBuffer(worldToClipMatrixBuffer, offset: 0, index: 1)
+			renderPassEncoder.setVertexBuffer(modelToWorldMatrixBuffer, offset: 0, index: 2)
+			renderPassEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: renderedModel.vertices.count)
+		}
 		
 		renderPassEncoder.endEncoding()
 		
