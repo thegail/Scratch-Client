@@ -35,9 +35,18 @@ class RenderWrapper: NSObject, MTKViewDelegate {
 		do {
 			try self.renderer.draw(in: view)
 		} catch DrawError.failedToCreateBuffer(type: let type) {
-			fatalError("Failed to render frame: failed to create \(type) buffer")
+			// @TODO Logging
+			print("Failed to to create \(type.rawValue) buffer! Dropping frame...")
+			return
+		} catch DrawError.failedToCreateRenderEncoder {
+			print("Failed to create render command encoder! Dropping frame...")
+			return
+		} catch DrawError.failedToCreateRenderPassDescriptor {
+			print("Failed to create render pass descriptor! Dropping frame...")
+			return
 		} catch {
-			fatalError("Failed to render frame")
+			print("Failed to render frame! Dropping...")
+			return
 		}
 	}
 	

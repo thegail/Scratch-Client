@@ -8,5 +8,5 @@
 import Foundation
 
 enum BufferType: String {
-	case vertex, matrix
+	case vertex, matrix, command
 }

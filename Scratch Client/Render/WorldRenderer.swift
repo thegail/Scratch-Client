@@ -10,8 +10,9 @@ import MetalKit
 
 class WorldRenderer {
 	
-	let commandQueue: MTLCommandQueue
-	let pipelineState: MTLRenderPipelineState
+	private let commandQueue: MTLCommandQueue
+	private let pipelineState: MTLRenderPipelineState
+	private let depthState: MTLDepthStencilState
 	var renderedModels: Array<GlobalGeometry>
 	var camera: Camera
 	
@@ -26,7 +27,9 @@ class WorldRenderer {
 		
 		let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
 		
-		guard let library = device.makeDefaultLibrary() else { fatalError("Failed to create shader library") }
+		guard let library = device.makeDefaultLibrary() else {
+			throw RendererInitializationError.failedToCreateShaderLibrary
+		}
 		guard let vertexShader = library.makeFunction(name: "sc_vertex_shader") else {
 			throw RendererInitializationError.failedToCreateShader(type: .vertex)
 		}
@@ -42,8 +45,16 @@ class WorldRenderer {
 		do {
 			self.pipelineState = try device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
 		} catch {
-			fatalError("Failed to create render pipeline state. This message should never appear")
+			throw RendererInitializationError.failedToCreatePipelineState
 		}
+		
+		let depthDescriptor = MTLDepthStencilDescriptor()
+		depthDescriptor.depthCompareFunction = .lessEqual
+		depthDescriptor.isDepthWriteEnabled = true
+		guard let depthState = device.makeDepthStencilState(descriptor: depthDescriptor) else {
+			throw RendererInitializationError.failedToCreateDepthState
+		}
+		self.depthState = depthState
 		
 		self.renderedModels = [
 			ChunkGeometry(
@@ -66,12 +77,18 @@ class WorldRenderer {
 	}
 	
 	func draw(in view: MTKView) throws {
-		guard let commandBuffer = self.commandQueue.makeCommandBuffer() else { return }
-		guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
+		guard let commandBuffer = self.commandQueue.makeCommandBuffer() else {
+			throw DrawError.failedToCreateBuffer(type: .command)
+		}
+		guard let renderPassDescriptor = view.currentRenderPassDescriptor else {
+			throw DrawError.failedToCreateRenderPassDescriptor
+		}
 		
 		renderPassDescriptor.colorAttachments[0].clearColor = view.clearColor
 		
-		guard let renderPassEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
+		guard let renderPassEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
+			throw DrawError.failedToCreateRenderEncoder
+		}
 		
 		var worldToClipMatrix = self.camera.worldToClipMatrix
 		
@@ -80,13 +97,8 @@ class WorldRenderer {
 			throw DrawError.failedToCreateBuffer(type: .matrix)
 		}
 		
-		let depthDescriptor = MTLDepthStencilDescriptor()
-		depthDescriptor.depthCompareFunction = .lessEqual
-		depthDescriptor.isDepthWriteEnabled = true
-		guard let depthState = view.device?.makeDepthStencilState(descriptor: depthDescriptor) else { return }
-		
 		renderPassEncoder.setRenderPipelineState(self.pipelineState)
-		renderPassEncoder.setDepthStencilState(depthState)
+		renderPassEncoder.setDepthStencilState(self.depthState)
 		
 		
 		for renderedModel in self.renderedModels {
